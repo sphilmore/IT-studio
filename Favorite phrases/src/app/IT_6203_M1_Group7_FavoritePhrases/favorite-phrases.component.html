@@ -1,0 +1,17 @@
+
+<div class="notebook-container">
+  <h2>Favorite Phrases Notebook</h2>
+  
+  <!-- Form to create a new notebook -->
+  <form (submit)="addNotebook()">
+    <input type="text" [(ngModel)]="newNotebook" placeholder="Enter Notebook Title" />
+    <button type="submit">Add Notebook</button>
+  </form>
+
+  <!-- Displaying all notebooks -->
+  <div *ngFor="let notebook of notebooks">
+    <h3>{{ notebook.title }}</h3>
+    <button (click)="editNotebook(notebook)">Edit</button>
+    <button (click)="deleteNotebook(notebook.id)">Delete</button>
+  </div>
+</div>

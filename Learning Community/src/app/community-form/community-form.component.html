@@ -1,0 +1,19 @@
+<div class="card">
+    <h3>New Post</h3>
+    <form (ngSubmit)="onSubmit()" [formGroup]="communityForm">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title" name="title">
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label>Content</mat-label>
+        <textarea matInput placeholder="Content" formControlName="content" name="content"></textarea>
+      </mat-form-field>
+  
+      <p>
+        <button type="submit" mat-raised-button color="primary">Submit</button>
+      </p>
+    </form>
+  </div>
+  
