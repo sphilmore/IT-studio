@@ -1,0 +1,36 @@
+<div class="form-container">
+  <h2>Create New Post</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="communityForm">
+    <div class="form-group">
+      <input 
+        type="text" 
+        placeholder="Enter title"
+        formControlName="title"
+        class="form-input"
+      >
+      <div *ngIf="communityForm.get('title')?.touched && communityForm.get('title')?.invalid" class="error-message">
+        Title is required
+      </div>
+    </div>
+
+    <div class="form-group">
+      <textarea 
+        placeholder="Enter content"
+        formControlName="content"
+        class="form-input textarea"
+        rows="4"
+      ></textarea>
+      <div *ngIf="communityForm.get('content')?.touched && communityForm.get('content')?.invalid" class="error-message">
+        Content is required
+      </div>
+    </div>
+
+    <button 
+      type="submit" 
+      class="submit-button"
+      [disabled]="!communityForm.valid"
+    >
+      Create Post
+    </button>
+  </form>
+</div> 

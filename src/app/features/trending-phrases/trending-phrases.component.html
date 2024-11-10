@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Trending Phrases</h1>
+
+  <div class="add-phrase-section">
+    <h2>Add New Phrase</h2>
+    <div class="input-group">
+      <input 
+        type="text" 
+        [(ngModel)]="newPhrase.phrase" 
+        placeholder="Enter phrase"
+        class="phrase-input"
+      >
+      <input 
+        type="text" 
+        [(ngModel)]="newPhrase.translation" 
+        placeholder="Enter translation"
+        class="phrase-input"
+      >
+      <button (click)="addPhrase()" class="add-button">Add Phrase</button>
+    </div>
+  </div>
+
+  <div class="phrases-list">
+    <h2>Popular Phrases</h2>
+    <div *ngFor="let phrase of trendingPhrases" class="phrase-item">
+      <div class="phrase-content">
+        <div class="phrase-text">
+          <h3>{{ phrase.phrase }}</h3>
+          <p>{{ phrase.translation }}</p>
+        </div>
+        <div class="phrase-actions">
+          <div class="upvotes">
+            <span class="upvote-count">{{ phrase.upvotes }}</span>
+            <button (click)="upvotePhrase(phrase)" class="upvote-button">
+              👍 Upvote
+            </button>
+          </div>
+          <button (click)="deletePhrase(phrase.id)" class="delete-button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

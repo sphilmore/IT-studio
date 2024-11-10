@@ -1,0 +1,29 @@
+<div class="page-container">
+  <h1 class="page-title">Favorite Phrases</h1>
+
+  <div class="create-notebook form-container">
+    <h2>Create New Notebook</h2>
+    <div class="input-group">
+      <input 
+        type="text" 
+        [(ngModel)]="newNotebook" 
+        placeholder="Enter notebook title"
+        class="notebook-input"
+      >
+      <button (click)="addNotebook()" class="add-button">Add Notebook</button>
+    </div>
+  </div>
+
+  <div class="notebooks-list">
+    <h2>Your Notebooks</h2>
+    <div *ngFor="let notebook of notebooks" class="notebook-item">
+      <div class="notebook-content">
+        <h3>{{ notebook.title }}</h3>
+        <div class="notebook-actions">
+          <button (click)="editNotebook(notebook)" class="edit-button">Edit</button>
+          <button (click)="deleteNotebook(notebook.id)" class="delete-button">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

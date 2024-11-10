@@ -1,0 +1,16 @@
+<div class="page-container">
+    <h1 class="page-title">Learning Community</h1>
+    
+    <div class="posts-list">
+        <ul *ngFor="let term of slangTerms; let i = index">
+            <li class="post-item">
+                <h3>{{ term.title }}</h3>
+                <p>{{ term.content }}</p>
+                <small>ID: {{ term.id }}</small>
+                <button class="delete-button" (click)="onDelete(term._id)">DELETE</button>
+            </li>
+        </ul>
+    </div>
+
+    <app-community-form></app-community-form>
+</div> 

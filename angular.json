@@ -3,19 +3,19 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "main-app": {
+    "it-studio": {
       "projectType": "application",
       "schematics": {},
-      "root": "src",
+      "root": "",
       "sourceRoot": "src",
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/main-app",
+            "outputPath": "dist/it-studio",
             "index": "src/index.html",
-            "browser": "src/main.ts",
+            "main": "src/main.ts",
             "polyfills": ["zone.js"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -44,9 +44,12 @@
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "namedChunks": true
             }
           },
           "defaultConfiguration": "production"
@@ -55,10 +58,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "main-app:build:production"
+              "browserTarget": "it-studio:build:production"
             },
             "development": {
-              "buildTarget": "main-app:build:development"
+              "browserTarget": "it-studio:build:development"
             }
           },
           "defaultConfiguration": "development"

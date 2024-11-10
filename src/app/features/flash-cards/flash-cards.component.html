@@ -1,0 +1,31 @@
+<div class="page-container">
+  <h1 class="page-title">Flashcard System</h1>
+
+  <div class="create-flashcard form-container">
+    <h2>Create a New Flashcard</h2>
+    <input [(ngModel)]="newFlashcard.term" placeholder="Term" required>
+    <input [(ngModel)]="newFlashcard.definition" placeholder="Definition" required>
+    <input [(ngModel)]="newFlashcard.example" placeholder="Example (optional)">
+    <button (click)="addFlashcard()">Add Flashcard</button>
+  </div>
+
+  <div class="flashcards-list">
+    <h2>Your Flashcards</h2>
+    <div *ngFor="let flashcard of flashcards" class="flashcard">
+      <div *ngIf="editingFlashcard?.id !== flashcard.id; else editForm">
+        <h3>{{ flashcard.term }}</h3>
+        <p><strong>Definition:</strong> {{ flashcard.definition }}</p>
+        <p *ngIf="flashcard.example"><strong>Example:</strong> {{ flashcard.example }}</p>
+        <button (click)="startEdit(flashcard)">Edit</button>
+        <button (click)="deleteFlashcard(flashcard.id)">Delete</button>
+      </div>
+      <ng-template #editForm>
+        <input [(ngModel)]="editingFlashcard!.term" placeholder="Term">
+        <input [(ngModel)]="editingFlashcard!.definition" placeholder="Definition">
+        <input [(ngModel)]="editingFlashcard!.example" placeholder="Example">
+        <button (click)="saveEdit()">Save</button>
+        <button (click)="cancelEdit()">Cancel</button>
+      </ng-template>
+    </div>
+  </div>
+</div> 
