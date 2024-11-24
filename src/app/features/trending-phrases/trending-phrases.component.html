@@ -1,43 +1,80 @@
-<div class="container">
-  <h1>Trending Phrases</h1>
+<div class="container mx-auto p-4">
+  <h2 class="text-2xl font-bold mb-4">Trending Phrases</h2>
 
-  <div class="add-phrase-section">
-    <h2>Add New Phrase</h2>
-    <div class="input-group">
-      <input 
-        type="text" 
-        [(ngModel)]="newPhrase.phrase" 
+  <!-- Add new phrase form -->
+  <div class="mb-6 p-4 bg-gray-100 rounded-lg">
+    <h3 class="text-lg font-semibold mb-2">Add New Phrase</h3>
+    <div class="flex gap-2">
+      <input
+        [(ngModel)]="newPhrase.phrase"
         placeholder="Enter phrase"
-        class="phrase-input"
+        class="flex-1 p-2 border rounded"
+      />
+      <input
+        [(ngModel)]="newPhrase.translation"
+        placeholder="Translation (optional)"
+        class="flex-1 p-2 border rounded"
+      />
+      <button
+        (click)="addPhrase()"
+        class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        [disabled]="loading"
       >
-      <input 
-        type="text" 
-        [(ngModel)]="newPhrase.translation" 
-        placeholder="Enter translation"
-        class="phrase-input"
-      >
-      <button (click)="addPhrase()" class="add-button">Add Phrase</button>
+        {{ loading ? 'Adding...' : 'Add Phrase' }}
+      </button>
     </div>
   </div>
 
-  <div class="phrases-list">
-    <h2>Popular Phrases</h2>
-    <div *ngFor="let phrase of trendingPhrases" class="phrase-item">
-      <div class="phrase-content">
-        <div class="phrase-text">
-          <h3>{{ phrase.phrase }}</h3>
-          <p>{{ phrase.translation }}</p>
-        </div>
-        <div class="phrase-actions">
-          <div class="upvotes">
-            <span class="upvote-count">{{ phrase.upvotes }}</span>
-            <button (click)="upvotePhrase(phrase)" class="upvote-button">
-              👍 Upvote
-            </button>
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="text-center py-4">
+    <p>Loading...</p>
+  </div>
+
+  <!-- Phrases list -->
+  <div class="grid gap-4">
+    <div *ngFor="let phrase of trendingPhrases" 
+         class="p-4 border rounded-lg shadow-sm hover:shadow-md transition-shadow">
+      <div class="flex justify-between items-start">
+        <div class="flex-1">
+          <h3 class="text-xl font-semibold">{{ phrase.phrase }}</h3>
+          <p *ngIf="phrase.phonetic" class="text-gray-600 italic">
+            {{ phrase.phonetic }}
+          </p>
+          <p *ngIf="phrase.translation" class="text-gray-600">
+            Translation: {{ phrase.translation }}
+          </p>
+          <div *ngIf="phrase.definition" class="mt-2">
+            <p class="text-gray-800">
+              <span *ngIf="phrase.partOfSpeech" class="italic text-gray-600">
+                {{ phrase.partOfSpeech }}
+              </span>
+              {{ phrase.definition }}
+            </p>
+            <p *ngIf="phrase.example" class="text-gray-600 mt-1">
+              Example: "{{ phrase.example }}"
+            </p>
           </div>
-          <button (click)="deletePhrase(phrase.id)" class="delete-button">Delete</button>
+        </div>
+        <div class="flex gap-2">
+          <button
+            (click)="upvotePhrase(phrase)"
+            class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600"
+          >
+            ↑ {{ phrase.upvotes }}
+          </button>
+          <button
+            (click)="deletePhrase(phrase.id)"
+            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600"
+          >
+            ✕
+          </button>
         </div>
       </div>
     </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="trendingPhrases.length === 0 && !loading" class="text-center py-8">
+    <p class="text-gray-600">No phrases yet. Add some phrases to get started!</p>
   </div>
 </div> 
